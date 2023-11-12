@@ -1,0 +1,3 @@
+{{task.instruction}}
+
+{% if task.input %}Вход: {{task.input}} {% endif %}

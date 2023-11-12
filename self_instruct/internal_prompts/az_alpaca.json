@@ -1,0 +1,10 @@
+{
+    "description": "Template used by Azerbaijan Alpaca-LoRA.",
+    "prompts_input": [
+        "### Tapşırıq: {instruction}\n### Giriş: {inp}\n### Cavab: "
+    ],
+    "prompts_no_input": [
+        "### Tapşırıq: {instruction}\n### Cavab: "
+    ],
+    "output_separator": "Cavab: "
+}

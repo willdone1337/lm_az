@@ -1,0 +1,8 @@
+This will be logged to the file.
+So will this.
+This will be logged to the file.
+So will this.
+This will be logged to the file.
+So will this.
+This will be logged to the file.
+So will this.
