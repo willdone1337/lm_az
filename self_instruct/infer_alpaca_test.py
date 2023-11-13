@@ -2,11 +2,11 @@ from peft import PeftModel, PeftConfig
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 
-MODEL_NAME = "az_gpt2_alpaca"
+ADAPTER_PATH = "az_gpt2_alpaca"
 
 tokenizer = AutoTokenizer.from_pretrained('az_gpt2_alpaca')
 
-config = PeftConfig.from_pretrained(MODEL_NAME)
+config = PeftConfig.from_pretrained(ADAPTER_PATH)
 print(config.base_model_name_or_path)
 model = AutoModelForCausalLM.from_pretrained(
     config.base_model_name_or_path,
@@ -14,11 +14,8 @@ model = AutoModelForCausalLM.from_pretrained(
     device_map="cpu"
 )
 
-model = PeftModel.from_pretrained(model, MODEL_NAME)
+model = PeftModel.from_pretrained(model,ADAPTER_PATH)
 model.eval()
-
-
-
 
 inputs = [
     # 'Что тут не так по смыслу: "зеленые бесцветные идеи яростно спят"?',

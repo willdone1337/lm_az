@@ -1,15 +1,64 @@
 import torch
 from transformers import pipeline, set_seed
-txt = """Qışda qar ilə"""
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
 
-device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-pipe = pipeline(
-    "text-generation", model="../models/mGPT-1.3B-azerbaijan", device=device
-    # "text-generation", model="aze_exp_3/checkpoint-1835008", device=device
-)
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-set_seed(43)
-print(pipe(txt, max_length=256, temperature=0.5,pad_token_id=pipe.tokenizer.eos_token_id))# [0]["generated_text"])
+model = GPT2LMHeadModel.from_pretrained("../models/mGPT-1.3B-azerbaijan")
+model.to(device)
+
+tokenizer = GPT2Tokenizer.from_pretrained("../models/mGPT-1.3B-azerbaijan")
+text = """Qışda qar ilə"""
+input_ids = tokenizer.encode(text, return_tensors="pt").cuda(device)
+model.eval()
+for x,y in model.named_parameters():
+    print(x)
+
+
+with torch.no_grad():
+    out = model.generate(
+            input_ids, 
+            min_length=100, 
+            max_length=100, 
+            top_k=10,
+            top_p=0.0,
+            no_repeat_ngram_size=5
+    )
+    generated_text = list(map(tokenizer.decode, out))[0]
+    print(generated_text)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# txt = """Qışda qar ilə"""
+
+# device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+
+# pipe = pipeline(
+#     "text-generation", model="../models/mGPT-1.3B-azerbaijan", device=device
+#     # "text-generation", model="aze_exp_3/checkpoint-1835008", device=device
+# )
+
+# set_seed(43)
+# print(pipe(txt, max_length=256, temperature=0.5,pad_token_id=pipe.tokenizer.eos_token_id))# [0]["generated_text"])
 # import jsonlines
 
 # def replace_non_utf_symbols_with_utf(text):

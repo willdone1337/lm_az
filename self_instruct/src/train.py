@@ -19,7 +19,7 @@ from src.util.io import read_jsonl
 
 os.environ["WANDB_LOG_MODEL"] = "checkpoint"
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
-    
+
 
 class TrainerNoBaseSave(Trainer):
     def __init__(self, *args, **kwargs):
@@ -262,7 +262,6 @@ def train(
     else:
         model = model_types[model_type].from_pretrained(model_name)
         model = fix_model(model, tokenizer)
-
     # Default model generation params
     model.config.num_beams = 5
     if mode == "instruct":
@@ -310,25 +309,5 @@ if __name__ == "__main__":
     parser.add_argument("--local_rank", type=int, default=0)
     parser.add_argument("--omit-base-model-save", action="store_true", default=False)
     args = parser.parse_args()
-    import sys
 
-    # Define the path to the log file
-    log_file_path = "az_gpt2_log_test.txt"
-
-    # Open the log file in append mode
-    with open(log_file_path, "a") as log_file:
-        # Redirect standard output to the log file
-        sys.stdout = log_file
-        sys.stderr = log_file
-
-        # Your Python script's code here
-        print("This will be logged to the file.")
-        print("So will this.")
-        # Any error messages or exceptions will also be logged
-        
-        # Restore standard output and error streams
-        sys.stdout = sys.__stdout__
-        sys.stderr = sys.__stderr__
-
-        print("This will be printed to the console.")
-        train(**vars(args))
+    train(**vars(args))
