@@ -5,12 +5,9 @@
   <img src="llama_aerodrom.png" alt="Project Image" style="border-radius:50%; width:200px; height:200px;">
 </div> -->
 
-<!-- Center the image with HTML and CSS -->
-<div style="text-align:center;">
-  <!-- Apply circular crop to the image -->
-  <img src="llama_aerodrom.png" alt="Your Image" style="border-radius: 50%;">
-</div>
-
+<p align="center">
+  <img src="llama_aerodrom.png" alt="Your Image" width="150" style="border-radius:50%;">
+</p>
 This repository builds upon the foundation of the [ru_lrm](https://github.com/IlyaGusev/rulm) repository and the [mGPT-Azerbaijan](https://huggingface.co/ai-forever/mGPT-1.3B-azerbaijan) model with specific adaptations tailored for training and applying a model in Azerbaijani language. The key steps include:
 
 ## Steps Taken
