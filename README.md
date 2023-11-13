@@ -1,8 +1,14 @@
 # Alpaca-Az
 
-
+<!-- 
 <div style="text-align:center">
   <img src="llama_aerodrom.png" alt="Project Image" style="border-radius:50%; width:200px; height:200px;">
+</div> -->
+
+<!-- Center the image with HTML and CSS -->
+<div style="text-align:center;">
+  <!-- Apply circular crop to the image -->
+  <img src="llama_aerodrom.png" alt="Your Image" style="border-radius: 50%;">
 </div>
 
 This repository builds upon the foundation of the [ru_lrm](https://github.com/IlyaGusev/rulm) repository and the [mGPT-Azerbaijan](https://huggingface.co/ai-forever/mGPT-1.3B-azerbaijan) model with specific adaptations tailored for training and applying a model in Azerbaijani language. The key steps include:
@@ -37,12 +43,6 @@ This repository builds upon the foundation of the [ru_lrm](https://github.com/Il
 - Training took place on a GPU for a few hours, utilizing a batch size of 4 and spanning over 3 epochs.
 - The training loss reached 1.03, while the evaluation loss is reported as 0.97.
 
-
-## Training and Inference 
- - Used nvcr.io/nvidia/cuda:11.7.0-cudnn8-devel-ubuntu20.04 image 
- with torch==2.0.0cu+117
- - Install requirements
-
 ## Examples
 ```
 Sual : Su insan üçün nəyə lazımdır? 
@@ -51,12 +51,39 @@ Cavab: Su insan üçün çox vacibdir, çünki o, sağlamlığınızı və rifah
 ```
 Tapşırıq : Sevdiyiniz kitab və ya film personajının təsvirini yazın 
 Cavab: Ən çox sevdiyim kitab Mixail Bulqakovun “Ustad və Marqarita” kitabıdır. Bu, Moskvada Ustad və onun sevimli Marqaritanın hekayəsindən bəhs edir. Kitabın süjeti, personajları və onun mənəviyyatı məni valeh edir.
+```
+
+
+
+# Setup
+
+
+ - Used nvcr.io/nvidia/cuda:11.7.0-cudnn8-devel-ubuntu20.04 image 
+ with torch==2.0.0cu+117
+ - Install requirements
+```bash
+git clone https://github.com/willdone1337/alpaca_az
+cd rulm
+pip install -r requirements.txt
 
 ```
-## Inference
- - Download and move the az_gpt2_alpaca to self_instrcut directory
+ - Download and move the mGPT-1.3B-azerbaijan model to the /rulm/models/ directory
+ ```bash
+ python3 -c 'from huggingface_hub import snapshot_download; snapshot_download(repo_id="ai-forever/mGPT-1.3B-azerbaijan", local_dir="models/")'
+ ```
+
+ - Download and move the az_gpt2_alpaca to rulm/self_instruct directory
+```bash
+ python3 -c 'from huggingface_hub import snapshot_download; snapshot_download(repo_id="ai-forever/willdone1337/model", local_dir="./")'
+ ```
+ - alpaca_az_translated is exist in the src/data_processing dir
  - Provide the model in the inference py script
 
-## Fine tune
- - Download and move the mGPT-1.3B-azerbaijan model to the /rulm/models/ directory
- - Provide it in the alpaca_lora.json config file
+### Inference
+```bash
+python3 infer_alpaca_az.py 
+```
+### Fine-Tune
+```bash
+cd self_instruct &&  python3 -m src.train --config-file configs/llama_7b_lora.json --train-file src/data_processing/alpaca_az_read_edited_v2.jsonl --val-file src/data_processing/alpaca_az_read_eval_edited_v2.jsonl --output-dir az_gpt2_alpaca
+```
