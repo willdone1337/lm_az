@@ -1,3 +1,5 @@
+az_gpt2_alpaca_attn_cproj/
+az_gpt2_alpaca_attn_proj/
 alpaca_mgpt_az/
 az_1st_version/
 az_2nd_version/
@@ -7,3 +9,4 @@ out_model/
 out_ru_test/
 ru_last_version/
 wandb/
+mgpt.py

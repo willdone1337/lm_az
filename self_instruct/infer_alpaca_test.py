@@ -10,8 +10,8 @@ config = PeftConfig.from_pretrained(ADAPTER_PATH)
 print(config.base_model_name_or_path)
 model = AutoModelForCausalLM.from_pretrained(
     config.base_model_name_or_path,
-    load_in_8bit=False,
-    device_map="cpu"
+    load_in_8bit=True,
+    device_map="auto"
 )
 
 model = PeftModel.from_pretrained(model,ADAPTER_PATH)
@@ -57,9 +57,11 @@ python -m src.convert_to_native \
     --enable_offloading
 """
 
+
 from transformers import GenerationConfig
 
-generation_config = GenerationConfig.from_pretrained('models/llama-7b',max_length=1024)
+
+generation_config = GenerationConfig.from_pretrained('models/mGPT-1.3B-azerbaijan',max_length=1024)
 print('~'*20)
 print(generation_config)
 print('~'*20)
