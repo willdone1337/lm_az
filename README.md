@@ -85,7 +85,6 @@ Cavab: Ən çox sevdiyim kitab Mixail Bulqakovun “Ustad və Marqarita” kitab
     ```
  - Download and move the mGPT-1.3B-azerbaijan model to the /lm_az/models/ directory
     ```bash
-    cd lm_az
     python3 -c 'from huggingface_hub import snapshot_download; snapshot_download(repo_id="ai-forever/mGPT-1.3B-azerbaijan", local_dir="models/mGPT-1.3B-azerbaijan")'
     ```
 
