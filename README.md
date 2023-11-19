@@ -1,10 +1,32 @@
 # Alpaca-Az
 
 <p align="center">
-  <img src="llama_aerodrom.png" alt="Your Image" width="350" style="border-radius:50%;">
+  <img src="repo_image/llama_aerodrom.png" alt="Your Image" width="350" style="border-radius:50%;">
 </p>
 
-This repository builds upon the foundation of the [ru_lrm](https://github.com/IlyaGusev/rulm) repository and the [mGPT-Azerbaijan](https://huggingface.co/ai-forever/mGPT-1.3B-azerbaijan) model with specific adaptations tailored for training and applying a model in Azerbaijani language. The key steps include:
+## Introduction
+This repository builds upon the [ru_lrm](https://github.com/IlyaGusev/rulm) repository and the [mGPT-Azerbaijan](https://huggingface.co/ai-forever/mGPT-1.3B-azerbaijan) model with specific adaptations adapted for training and applying a model in Azerbaijani language. Trained adapter [weights](https://huggingface.co/vildanh/az_gpt_alpaca) and [dataset](https://huggingface.co/datasets/vildanh/az_alpaca_translated) are here. Before diving in, it's crucial to provide some context about the current state of the model.
+
+
+This language model is a work in progress, and wanted to be clear about its current limitations. At this stage:
+
+- **Accuracy:** The model's accuracy may not be optimal, and it might produce outputs that contain errors or inaccuracies.
+  
+- **Hallucinations:** The model may exhibit hallucination-like behavior, generating content that is not contextually accurate or coherent.
+
+Acknowledging these limitations is part of the ongoing process of refining and evolving the model. The intent is to create an open space for collaboration, where the community can actively contribute to enhancing the model's performance. In this experiment, also utilized the Llama model for fine-tuning. However, it's remarkable that the GPT-2 model demonstrated higher accuracy during training.
+
+## How You Can Contribute
+
+Your contributions and feedback are crucial for refining and evolving this language model. Here's how you can contribute:
+
+1. **Data Quality:** Provide high-quality Azerbaijani language data to improve the model's training dataset.
+  
+2. **Model Tuning:** Contribute to fine-tuning strategies, model architecture enhancements, or propose new approaches to mitigate hallucinations.
+
+3. **Feedback:** Share your experiences, report issues, and provide constructive feedback on the model's outputs.
+
+
 
 ## Steps Taken
 
@@ -36,9 +58,13 @@ This repository builds upon the foundation of the [ru_lrm](https://github.com/Il
 
 - For Llama finetuning, components such as k_proj, v_proj, etc., were utilized. In this context, c_proj or attn_proj was employed.
 - Training took place on a GPU for a few hours, utilizing a batch size of 4 and spanning over 3 epochs.
-- The training loss reached 1.03, while the evaluation loss is reported as 0.97.
+- The training loss reached 1.02, while the evaluation loss is 0.96.
 
 ## Examples
+```
+Sual : Təbiətin qorunmağı ölkənin iqtisadiyyatına necə təsir edir? 
+Cavab: Təbiəti qorumağın bir çox yolu var, o cümlədən ekoloji cəhətdən təmiz texnika və müntəzəm nəqliyyat vasitələri ilə. Bununla belə, hökumət tərəfindən təşviq edilə biləcək daha az miqyaslı ekoloji problemlər də var. Məsələn, tullantıların toplanması və utilizasiyası üçün bəzi yerlərdə elektrik enerjisi kimi alternativ enerji mənbələrinə keçidlə bağlı problemlər də ola bilər. Bundan əlavə, təbiətin mühafizəsi sahəsində fəaliyyət göstərən beynəlxalq təşkilatlar da bu problemin öhdəsindən gəlməlidirlər.
+```
 ```
 Sual : Su insan üçün nəyə lazımdır? 
 Cavab: Su insan üçün çox vacibdir, çünki o, sağlamlığınızı və rifahınızı yaxşılaşdırmağa kömək edir. O, həmçinin ürək-damar xəstəlikləri, diabet və xərçəng kimi müxtəlif xəstəliklərin riskini azaltmağa kömək edir.
@@ -59,13 +85,14 @@ Cavab: Ən çox sevdiyim kitab Mixail Bulqakovun “Ustad və Marqarita” kitab
     ```
  - Download and move the mGPT-1.3B-azerbaijan model to the /rulm/models/ directory
     ```bash
-    python3 -c 'from huggingface_hub import snapshot_download; snapshot_download(repo_id="ai-forever/mGPT-1.3B-azerbaijan", local_dir="models/")'
+    cd alpaca_az
+    python3 -c 'from huggingface_hub import snapshot_download; snapshot_download(repo_id="ai-forever/mGPT-1.3B-azerbaijan", local_dir="models/mGPT-1.3B-azerbaijan")'
     ```
 
  - Download and move the az_gpt2_alpaca to rulm/self_instruct directory
     ```bash
     cd self_instruct
-    python3 -c 'from huggingface_hub import snapshot_download; snapshot_download(repo_id="ai-forever/willdone1337/model", local_dir="./")'
+    python3 -c 'from huggingface_hub import snapshot_download; snapshot_download(repo_id="vildanh/az_gpt_alpaca", local_dir="az_gpt2_alpaca_attn_cproj/")'
     ```
  - alpaca_az_translated is exist in the src/data_processing dir
  - Provide the model adapters to the inference py script
