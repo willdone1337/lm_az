@@ -10,3 +10,4 @@ out_ru_test/
 ru_last_version/
 wandb/
 mgpt.py
+infer_alpaca_test.py
