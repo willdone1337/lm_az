@@ -5,7 +5,7 @@
 </p>
 
 ## Introduction
-This repository builds upon the [ru_lrm](https://github.com/IlyaGusev/rulm) repository and the [mGPT-Azerbaijan](https://huggingface.co/ai-forever/mGPT-1.3B-azerbaijan) model with specific adaptations adapted for training and applying a model in Azerbaijani language. Trained adapter [weights](https://huggingface.co/vildanh/az_gpt_alpaca) and [dataset](https://huggingface.co/datasets/vildanh/az_alpaca_translated) are here. Before diving in, it's crucial to provide some context about the current state of the model.
+This repository builds upon the [ru_lrm](https://github.com/IlyaGusev/rulm) repository and the [mGPT-Azerbaijan](https://huggingface.co/ai-forever/mGPT-1.3B-azerbaijan) model with specific adaptations for training and applying a model in Azerbaijani language. Trained adapter [weights](https://huggingface.co/vildanh/az_gpt_alpaca) and [dataset](https://huggingface.co/datasets/vildanh/az_alpaca_translated) are here. Before diving in, it's crucial to provide some context about the current state of the model.
 
 
 This language model is a work in progress, and wanted to be clear about its current limitations. At this stage:
@@ -14,7 +14,7 @@ This language model is a work in progress, and wanted to be clear about its curr
   
 - **Hallucinations:** The model may exhibit hallucination-like behavior, generating content that is not contextually accurate or coherent.
 
-Acknowledging these limitations is part of the ongoing process of refining and evolving the model. The intent is to create an open space for collaboration, where the community can actively contribute to enhancing the model's performance. In this experiment, also utilized the Llama model for fine-tuning. However, it's remarkable that the GPT-2 model demonstrated higher accuracy during training.
+Acknowledging these limitations is part of the ongoing process of refining and evolving the model. The intent is to create an open space for collaboration, where the community can actively contribute to enhancing the model's performance. In this experiment, also utilized the Llama model for fine-tuning. However, it's remarkable that the mGPT model trained for Azerbijani language demonstrated higher accuracy during training, and shared weights belonged to it.
 
 ## How You Can Contribute
 
@@ -57,7 +57,7 @@ Your contributions and feedback are crucial for refining and evolving this langu
 ## Training Details
 
 - For Llama finetuning, components such as k_proj, v_proj, etc., were utilized. In this context, c_proj or attn_proj was employed.
-- Training took place on a GPU for a few hours, utilizing a batch size of 4 and spanning over 3 epochs.
+- Training took place on a GPU for a few hours, utilizing a batch size of 4 and over 3 epochs.
 - The training loss reached 1.02, while the evaluation loss is 0.96.
 
 ## Examples
@@ -83,19 +83,18 @@ Cavab: Ən çox sevdiyim kitab Mixail Bulqakovun “Ustad və Marqarita” kitab
     cd rulm
     pip install -r requirements.txt
     ```
- - Download and move the mGPT-1.3B-azerbaijan model to the /rulm/models/ directory
+ - Download and move the mGPT-1.3B-azerbaijan model to the /alpaca_az/models/ directory
     ```bash
     cd alpaca_az
     python3 -c 'from huggingface_hub import snapshot_download; snapshot_download(repo_id="ai-forever/mGPT-1.3B-azerbaijan", local_dir="models/mGPT-1.3B-azerbaijan")'
     ```
 
- - Download and move the az_gpt2_alpaca to rulm/self_instruct directory
+ - Download and move the az_gpt2_alpaca_attn_cproj to /alpaca_az/self_instruct directory
     ```bash
     cd self_instruct
     python3 -c 'from huggingface_hub import snapshot_download; snapshot_download(repo_id="vildanh/az_gpt_alpaca", local_dir="az_gpt2_alpaca_attn_cproj/")'
     ```
  - alpaca_az_translated is exist in the src/data_processing dir
- - Provide the model adapters to the inference py script
 
 ### Inference
 ```bash
