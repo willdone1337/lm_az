@@ -79,17 +79,17 @@ Cavab: Ən çox sevdiyim kitab Mixail Bulqakovun “Ustad və Marqarita” kitab
  - Used nvcr.io/nvidia/cuda:11.7.0-cudnn8-devel-ubuntu20.04 image 
     ## Installation
     ```bash
-    git clone https://github.com/willdone1337/alpaca_az
+    git clone https://github.com/willdone1337/lm_az
     cd rulm
     pip install -r requirements.txt
     ```
- - Download and move the mGPT-1.3B-azerbaijan model to the /alpaca_az/models/ directory
+ - Download and move the mGPT-1.3B-azerbaijan model to the /lm_az/models/ directory
     ```bash
-    cd alpaca_az
+    cd lm_az
     python3 -c 'from huggingface_hub import snapshot_download; snapshot_download(repo_id="ai-forever/mGPT-1.3B-azerbaijan", local_dir="models/mGPT-1.3B-azerbaijan")'
     ```
 
- - Download and move the az_gpt2_alpaca_attn_cproj to /alpaca_az/self_instruct directory
+ - Download and move the az_gpt2_alpaca to /lm_az/self_instruct directory
     ```bash
     cd self_instruct
     python3 -c 'from huggingface_hub import snapshot_download; snapshot_download(repo_id="vildanh/az_gpt_alpaca", local_dir="az_gpt2_alpaca_attn_cproj/")'
@@ -104,3 +104,4 @@ python3 infer_alpaca_az.py
 ```bash
 cd self_instruct &&  python3 -m src.train --config-file configs/llama_7b_lora.json --train-file src/data_processing/alpaca_az_read_edited_v2.jsonl --val-file src/data_processing/alpaca_az_read_eval_edited_v2.jsonl --output-dir az_gpt2_alpaca
 ```
+
