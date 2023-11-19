@@ -80,7 +80,7 @@ Cavab: Ən çox sevdiyim kitab Mixail Bulqakovun “Ustad və Marqarita” kitab
     ## Installation
     ```bash
     git clone https://github.com/willdone1337/lm_az
-    cd rulm
+    cd lm_az
     pip install -r requirements.txt
     ```
  - Download and move the mGPT-1.3B-azerbaijan model to the /lm_az/models/ directory
